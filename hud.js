@@ -13,6 +13,8 @@ class HUD{
 
         this.container.addChild(this.puntaje);
         console.log("Se creo el hud");
-
+    }
+    actualizarHud(){
+        this.puntaje.text = "Puntaje: " + this.juego.player.asesinatos;
     }
 }

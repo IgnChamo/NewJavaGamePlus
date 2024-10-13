@@ -37,6 +37,7 @@ class Enemigo extends Objeto {
       this.juego.enemigos = this.juego.enemigos.filter((k) => k != this);
       this.aumentarRangoEnemigos();
       this.juego.player.aumentarAsesinatos();
+      this.juego.hud.actualizarHud();
       this.grid.remove(this);
       this.desaparecer();
 
