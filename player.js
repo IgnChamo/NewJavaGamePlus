@@ -5,6 +5,7 @@ class Player extends Objeto {
     this.juego = juego;
     this.grid = juego.grid;
     this.explosion = 300;
+    this.asesinatos = 0;
 
     this.cargarVariosSpritesAnimados(
       {
@@ -70,7 +71,9 @@ class Player extends Objeto {
     }
     super.update();
   }
-
+  aumentarAsesinatos(){
+    this.asesinatos ++;
+  }
   chequearColisiones(radio, explosion) {
     this.juego.enemigos.forEach(enemigo => {
       const distancia = Math.sqrt(

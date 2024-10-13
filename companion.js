@@ -4,6 +4,7 @@ class Companion extends Objeto {
         this.velocidadMaximaOriginal = 3;
         this.juego = juego;
         this.grid = juego.grid;
+        this.juego.gameContainer.addChild(this.container);
 
         this.cargarVariosSpritesAnimados(
             {
@@ -22,8 +23,8 @@ class Companion extends Objeto {
 
     disparar() {
         let angulo = Math.atan2(
-            this.juego.mouse.x - this.app.stage.x - this.container.x,
-            this.juego.mouse.y - this.app.stage.y - this.container.y
+            this.juego.mouse.x - this.container.x,
+            this.juego.mouse.y - this.container.y
         );
         this.juego.balas.push(
             new Bala(
@@ -41,7 +42,7 @@ class Companion extends Objeto {
 
     update() {
         if (!this.listo) return;
-        this.cambiarSprite("idle");
+        //this.cambiarSprite("idle");
         this.companionBounce(juego.contadorDeFrames, { x: juego.player.container.x, y: juego.player.container.y });
         super.update();
     }

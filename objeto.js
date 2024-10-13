@@ -1,4 +1,4 @@
-// Clase base Objeto
+
 class Objeto {
   constructor(x, y, velocidadMax, juego) {
     this.id = generarID();
@@ -6,7 +6,7 @@ class Objeto {
     this.app = juego.app;
     this.juego = juego;
     this.container = new PIXI.Container();
-    this.juego.app.stage.addChild(this.container);
+    this.juego.gameContainer.addChild(this.container);
     this.listo = false;
     this.container.x = x;
     this.container.y = y;
@@ -14,8 +14,6 @@ class Objeto {
     this.velocidad = new PIXI.Point(0, 0);
     this.velocidadMax = velocidadMax;
     this.velocidadMaxCuadrada = velocidadMax * velocidadMax;
-
-    // this.container.anchor.set(0.5,1); // Pivote en el centro
 
     this.spritesAnimados = {};
   }

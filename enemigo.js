@@ -34,12 +34,12 @@ class Enemigo extends Objeto {
   recibirTiro() {
     this.vida -= 1;
     if (this.vida <= 0) {
-      //LO SACO DEL ARRAY DE ZOMBIES
       this.juego.enemigos = this.juego.enemigos.filter((k) => k != this);
-      //LO SACO DE LA GRILLA
       this.aumentarRangoEnemigos();
+      this.juego.player.aumentarAsesinatos();
       this.grid.remove(this);
       this.desaparecer();
+
       
     } else {
 

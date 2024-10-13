@@ -1,9 +1,9 @@
-// Clase Juego
+
 class Juego {
   constructor() {
     this.pausa = false;
-    this.canvasWidth = window.innerWidth  * 2;
-    this.canvasHeight = window.innerHeight * 4;
+    this.canvasWidth = 1920;
+    this.canvasHeight = 1080;
     this.app = new PIXI.Application({
       width: this.canvasWidth,
       height: this.canvasHeight,
@@ -11,6 +11,13 @@ class Juego {
       backgroundColor: 0x1099bb,
     });
     document.body.appendChild(this.app.view);
+
+    this.gameContainer = new PIXI.Container();
+    this.hudContainer = new PIXI.Container();
+    this.app.stage.addChild(this.gameContainer);
+    this.app.stage.addChild(this.hudContainer);
+    this.hud = new HUD(this);
+
     this.gridActualizacionIntervalo = 10; // Cada 10 frames
     this.contadorDeFrames = 0;
     this.grid = new Grid(50, this); // Tamaño de celda 50
@@ -23,7 +30,7 @@ class Juego {
 
     this.ponerFondo();
     this.ponerCompanion();
-    this.ponerEnemigos(500);
+    this.ponerEnemigos(50);
     this.ponerProtagonista();
 
     this.ponerListeners();
@@ -41,13 +48,13 @@ class Juego {
       this.backgroundSprite.tileScale.set(0.5);
 
       // Añadir el sprite al stage
-      this.app.stage.addChild(this.backgroundSprite);
+      this.gameContainer.addChildAt(this.backgroundSprite, 0);
     });
   }
   ponerProtagonista() {
     this.player = new Player(
       window.innerWidth / 2,
-      window.innerHeight * 0.9,
+      window.innerHeight / 2,
       this
     );
   }
@@ -154,17 +161,30 @@ class Juego {
       0
     );
 
-    // Aplicar Lerp para suavizar el movimiento de la cámara
-    this.app.stage.position.x = lerp(
-      this.app.stage.position.x,
+    this.gameContainer.x = lerp(
+      this.gameContainer.x,
       clampedX,
       lerpFactor
     );
-    this.app.stage.position.y = lerp(
-      this.app.stage.position.y,
+    this.gameContainer.y = lerp(
+      this.gameContainer.y,
       clampedY,
       lerpFactor
     );
+
+    
+    // Aplicar Lerp para suavizar el movimiento de la cámara
+    /*this.app.stage.x = lerp(
+      this.app.stage.x,
+      clampedX,
+      lerpFactor
+    );
+    this.app.stage.y = lerp(
+      this.app.stage.y,
+      clampedY,
+      lerpFactor
+    );*/
+
   }
   
 }
